@@ -1,12 +1,11 @@
 package book.akkaessentials.mapreduce.messages
 
-import java.util.Map
-import scala.collection.mutable.ArrayBuffer
+sealed trait MapReduceMessage
 
-case class Word(value: String, count: Integer = 1)
+case class WordCount(value: String, count: Integer) extends MapReduceMessage
 
-case class Result()
+case class MapData(dataList: List[WordCount]) extends MapReduceMessage
 
-case class MapData(dataList: List[Word])
+case class ReduceData(reduceDataMap: Map[String, Integer]) extends MapReduceMessage
 
-case class ReduceData(reduceDataMap: Map[String, Integer])
+case class Result() extends MapReduceMessage
